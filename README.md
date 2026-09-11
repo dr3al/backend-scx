@@ -1,1 +1,1 @@
-Проект FastAPI sad
+Проект FastAPI
