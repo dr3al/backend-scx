@@ -1,12 +1,9 @@
 from fastapi import APIRouter
-from pydantic import BaseModel, Field
+from schemas import TaskIn
 
 router = APIRouter()
 tasks = []
 
-class TaskIn(BaseModel):
-    title: str
-    priority: int = Field(default=10, ge=1, le=5)
 
 @router.get("/tasks", status_code=200)
 def get_tasks():
