@@ -7,13 +7,14 @@ from core.depends import get_current_user
 from schemas.users import UserResponse, UserCreate, Token
 from repositories.users import UserRepository
 from models import User
+from core.exceptions import EmailAlreadyRegisteredException
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register(user: UserCreate, repo: UserRepository = Depends()):
     if repo.get_user_by_email(user.email):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
+        raise EmailAlreadyRegisteredException(user.email)
     if repo.get_user_by_username(user.username):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already registered")
     return repo.create_user(user)
