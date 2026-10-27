@@ -28,3 +28,9 @@ class UserRepository:
         self.db.commit()
         self.db.refresh(db_user)
         return db_user
+
+    def update_avatar(self, user: User, avatar_url: str):
+        user.avatar_url = avatar_url
+        self.db.commit()
+        self.db.refresh(user)
+        return user

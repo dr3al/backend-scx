@@ -12,6 +12,12 @@ class Settings(BaseSettings):
     TOKEN_LIFETIME_MINUTES: int
     TOKEN_ALGORITHM: str
 
+    S3_ACCESS_KEY: str
+    S3_SECRET_KEY: str
+    S3_BUCKET: str
+    S3_REGION: str
+    S3_URL: str
+
     model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()
